@@ -1,0 +1,4 @@
+"""
+Average of a Range
+"""
+
