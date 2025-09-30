@@ -1,4 +1,6 @@
 l = [1,2,3,4, True, "eshmat"]
+t = (1,2,3,4, True, "eshmat")
+st = {1,2,3,4,5}
 
 l.insert(2, "hello")
 l.pop(3)
