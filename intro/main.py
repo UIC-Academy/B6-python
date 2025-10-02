@@ -9,7 +9,7 @@ print(10 > 9, 11 < 9, 10 == 10)
 print(bool("Eshmat"), bool(10), bool(-100))
 print(bool(None))
 
-print(7 ** 3)
+print(7**3)
 
 x = 10
 print(x < 5 and x < 10)

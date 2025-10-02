@@ -7,17 +7,17 @@ i = float(input("Enter i: "))
 j = float(input("Enter j: "))
 jmp = float(input("Enter jmp: "))
 
-if (is_increasing == True):
-    if (i > j):
+if is_increasing == True:
+    if i > j:
         print("i j dan katta bo'la olmaydi, agar o'sishni tanlagan bo'lsangiz.")
-    
-    while (i <= j):
+
+    while i <= j:
         print(i)
         i += jmp
 else:
-    if (i < j):
+    if i < j:
         print("i j dan kichik bo'la olmaydi, agar kamayishni tanlagan bo'lsangiz.")
 
-    while (i >= j):
+    while i >= j:
         print(i)
         i -= jmp

@@ -1,7 +1,13 @@
 import sys
 
-mytup = (1,2,3,True,False,)
-l = [1,2,3]
+mytup = (
+    1,
+    2,
+    3,
+    True,
+    False,
+)
+l = [1, 2, 3]
 
 print(sys.getsizeof(mytup), sys.getsizeof(l))
 print(mytup.count(0), mytup.index(1))
@@ -9,7 +15,7 @@ print(mytup.count(0), mytup.index(1))
 print(list(mytup), mytup)
 
 
-l = [1,["salom", "dunyo"], True]
+l = [1, ["salom", "dunyo"], True]
 t = (1, ["hello", "world"], False)
 
 print(t)
@@ -20,4 +26,10 @@ print(t)
 if 1 in t:
     print("True")
 
-print((1,2,)*3)
+print(
+    (
+        1,
+        2,
+    )
+    * 3
+)

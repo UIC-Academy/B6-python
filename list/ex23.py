@@ -3,4 +3,3 @@ Iterate through a list of strings and print only the ones that contain the lette
 """
 
 l = ["salom", "eshmat", "world", "hi", "telefon"]
-

@@ -1,4 +1,3 @@
 """
 Average of a Range
 """
-

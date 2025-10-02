@@ -2,7 +2,6 @@
 Join a list of words into a single string with spaces in between.
 """
 
-
 l = ["hello", "eshmat", "qalesan"]
 
 s = "-".join(l)

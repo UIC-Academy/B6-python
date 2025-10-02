@@ -2,7 +2,7 @@
 Memory related points
 """
 
-l1 = [3,2,4]
+l1 = [3, 2, 4]
 l2 = l1.copy()
 l2.append(5)
 print(l1, l2)

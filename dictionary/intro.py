@@ -13,7 +13,7 @@ student_grades = {
     "toshmat": 80,
     "gulchapchap": 90,
     "gulpari": 78,
-    "gishmat": 10
+    "gishmat": 10,
 }
 
 student_grades["zafarbek"] = 95
@@ -24,7 +24,7 @@ print(student_grades)
 # student_grades.clear()
 # print(student_grades)
 
-x = ('key1', 'key2', 'key3')
+x = ("key1", "key2", "key3")
 y = 0
 
 thisdict = dict.fromkeys(x, y)
@@ -39,7 +39,7 @@ last_popped = student_grades.popitem()
 print(last_popped, student_grades)
 
 student_grades.setdefault("gishmat", 80)
-if not "gishmat" in thisdict:
+if "gishmat" not in thisdict:
     thisdict["gishmat"] = 80
 
 print(student_grades)
