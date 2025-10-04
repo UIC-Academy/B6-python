@@ -2,7 +2,7 @@
 Optional Arguments
 """
 
-def f(x: int = 0, y: str = None) -> None:
+def f(x: int = 0, y: str = None) -> None | bool:
     print(x, y)
 
 f()

@@ -63,7 +63,9 @@ Focus: positional and keyword parameters, conditional logic, returning values.
     Demonstrate both default and explicit argument usage.
 
 17. **Temperature Converter:**
-    Create a function `to_celsius(fahrenheit)` and `to_fahrenheit(celsius)` using appropriate formulas.
+    Create a function `to_celsius(kelvin)` and `kelvin(celsius)` using appropriate formulas.
+    Celsius to Kelvin: K = C + 273.15
+    Kelvin to Celsius = C = K - 273.15
 
 18. **Unique Elements:**
     Write a function `unique_elements(lst)` that returns a set of unique values from a list.
