@@ -1,6 +1,4 @@
-# Functions Exercises 2
-
-## Theme 1: Function Scopes (Local, Global, Nonlocal) — 10 Exercises
+# Function Scopes and Nested Functions
 
 1. **Local vs Global Print**
 
@@ -71,8 +69,6 @@
 
 ---
 
-## 🏗️ Theme 2: Functions Inside Functions (Nested Functions) — 10 Exercises
-
 11. **Basic Nesting**
     Define a function `outer()` that prints “Outer start”, defines an inner function `inner()` printing “Inner call”, and then calls it.
 
@@ -119,7 +115,6 @@
     Define `outer()` that returns two inner functions `add_one()` and `add_two()`.
     Store them in variables and call separately.
 
----
 
 ## ⚙️ Theme 3: Functions as First-Class Objects — 10 Exercises
 
@@ -171,17 +166,3 @@
     * `"capitalize"` → capitalizes
     * `"words"` → splits into words
       Use it dynamically in a loop.
-
----
-
-## ✅ Teaching Tip / Practice Strategy
-
-Here’s a progression for self-study or teaching:
-
-* Do **1–10** first until you *feel* scope differences intuitively.
-* Do **11–20** to learn how functions can live inside others and use outer variables.
-* Then **21–30** to fully grasp that functions are *values* you can pass, return, and store.
-
----
-
-Would you like me to create **a 3-day mini-course** (with daily goals, theory recap, and exercise ordering + answers for self-verification) based on these 30? It’ll make it easier to guide beginners through the concepts progressively.
