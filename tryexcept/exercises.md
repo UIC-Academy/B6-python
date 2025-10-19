@@ -40,3 +40,28 @@
 38. Implement a context manager using `try-except-finally` to simulate file opening and closing manually.
 39. Create a script that reads JSON data and catches `json.JSONDecodeError` for invalid JSON strings.
 40. Combine decorators and exceptions: create a decorator that measures execution time and catches exceptions during execution.
+
+
+--- 
+
+# 10 Additional Exercises
+
+1. Write a decorator `suppress_exceptions` that wraps a function and prints `"Error suppressed"` instead of raising any exception. Test it with a function that divides two numbers.
+
+2. Create a decorator `retry_on_failure` that retries a function 3 times if it raises a `ValueError`. On final failure, re-raise the exception.
+
+3. Write a decorator `safe_call` that catches only `ZeroDivisionError` and returns `"Division by zero not allowed"`. For all other exceptions, re-raise them.
+
+4. Implement a decorator `validate_args` that checks if all arguments of a function are integers. If not, raise a `TypeError`. Test it with a function that sums numbers.
+
+5. Write a decorator `convert_exceptions` that catches `KeyError` and raises a `ValueError` instead with a message `"Key not found"`.
+
+6. Build a decorator `handle_exceptions(exception_type)` that accepts an exception class as parameter and prints a message whenever that specific exception occurs in the wrapped function.
+
+7. Write a decorator `ensure_non_empty` that raises a `ValueError` if the function receives an empty list or string as argument.
+
+8. Implement a decorator `log_exception` that logs exception messages into a list `error_log` (global variable). The decorator should catch any exception and not stop execution.
+
+9. Create a decorator `timeout_guard` that catches `TimeoutError` and prints `"Function timed out"`. Test it by manually raising `TimeoutError` inside the wrapped function.
+
+10. Write a decorator `assert_positive` that ensures all numeric arguments passed to the function are positive; otherwise, raise `ValueError`. Add a `try-except` inside the decorator to catch the error and print `"Non-positive argument detected"`.

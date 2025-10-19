@@ -1,17 +1,19 @@
 from typing import Callable
 
 def dec(func: Callable):
+    cnt = 0
     def wrapper(*args, **kwargs):
-        for i in range(3):
-            passwd = input("Enter password: ")
-            try:
-                func(passwd)
-                break
-            except PermissionError:
-                if i < 2:
-                    print("Incorrect Password, please try again!")
-                else:
-                    print("Too many attempts. You have been blocked!")
+        nonlocal cnt
+        
+        try:
+            res = func(passwd)
+            return res
+        except PermissionError:
+            cnt+=1
+            if cnt < 3:
+                print("Incorrect Password, please try again!")
+            else:
+                print("Too many attempts. You have been blocked!")
     return wrapper
 
 
@@ -20,7 +22,14 @@ def password_checker(passwd: str):
     if passwd != "supersecret":
         raise PermissionError("Incorrect Password")
     
-    print("Tizimga xush kelibsiz!")
+    return True
 
 
-password_checker()
+
+for i in range(3):
+    passwd = input("Enter password: ")
+    
+    if password_checker(passwd=passwd):
+        break
+
+print("Tizimga xush kelibsiz!")
