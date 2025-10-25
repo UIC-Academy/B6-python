@@ -25,7 +25,7 @@
 
 ### **`__str__` and `__repr__`**
 
-14. Implement `__str__` in the `Book` class to return “<title> by <author>”.
+14. Implement `__str__` in the `Book` class to return `"<title> by <author>"`.
 15. Implement both `__str__` and `__repr__` for the `Person` class. Compare printed outputs from `print(person)` and `repr(person)`.
 16. In the `Rectangle` class, implement `__repr__` to return “Rectangle(width=..., height=...)”.
 17. Add a `__str__` to `BankAccount` showing account owner and current balance.
