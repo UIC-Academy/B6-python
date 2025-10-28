@@ -20,6 +20,9 @@ class BankAccount:
         self.balance = self.balance - amount
         BankAccount.total_money -= amount
         
+    def delete_account(self):
+        print("Balance is chopped")
+        del self.balance
 
 zafarbeks_card = BankAccount(
     name="Zafarbek",
@@ -50,3 +53,9 @@ print("Bank balansi:", BankAccount.total_money)
 javohirs_card.withdraw(55000000)
 
 print("Bank balansi:", BankAccount.total_money)
+
+javohirs_card.delete_account()
+
+# print(javohirs_card, javohirs_card.balance)
+
+print(vars(BankAccount))
