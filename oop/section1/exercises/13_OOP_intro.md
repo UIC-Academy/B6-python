@@ -44,11 +44,65 @@
 
 ### **Static and Class Methods**
 
-23. Add a `@staticmethod` to `MathUtils` class that returns the square of a number.
-24. Add a `@classmethod` in `Person` that creates a `Person` object from a formatted string like `"John-25"`.
-25. Add a `@classmethod` `from_birth_year(cls, name, year)` that calculates age and returns a new `Person`.
-26. Create a `@staticmethod` in `Temperature` class that converts Celsius to Fahrenheit.
-27. Add a `@classmethod` to `Circle` that creates a circle given its diameter instead of radius.
+1. **Create Student from String**
+   Make a class method that creates a Student from "name,grade" string like "Anna,95"
+
+2. **Count How Many Pets Created**
+   Create a class method that tells how many Pet instances have been made
+
+3. **Make Default Book**
+   Create a class method that makes a Book with title "Unknown" and author "Unknown"
+
+4. **Create Circle from Diameter**
+   Make a class method that creates a Circle when you give it diameter instead of radius
+
+5. **Create Birthday Person**
+   Make a class method that creates a Person with age 0 (newborn)
+
+6. **Make Random Color**
+   Create a class method that makes a Color with random RGB values
+
+7. **Create Square from Area**
+   Make a class method that creates a Square when you know the area
+
+8. **Default Settings**
+   Create a class method that makes GameSettings with easy difficulty
+
+9. **Create from List**
+   Make a class method that creates a Fruit from a list like ["apple", "red"]
+
+10. **Student from Dictionary**
+    Create a class method that makes a Student from {"name": "Tom", "grade": 88}
+
+11. **Check if Number is Even**
+    Make a static method that checks if a number is even
+
+12. **Calculate Circle Area**
+    Create a static method that calculates area when given radius
+
+13. **Check Valid Email**
+    Make a static method that checks if email has "@" symbol
+
+14. **Convert Celsius to Fahrenheit**
+    Create a static method for temperature conversion
+
+15. **Check if Triangle is Valid**
+    Make a static method that checks if 3 sides can make a triangle
+
+16. **Calculate Dog Years**
+    Create a static method that converts human years to dog years (×7)
+
+17. **Check Strong Password**
+    Make a static method that checks if password has at least 8 characters
+
+18. **Calculate Pizza Slices**
+    Create a static method that calculates slices per person
+
+19. **Check Palindrome**
+    Make a static method that checks if a word reads same forwards and backwards
+
+20. **Calculate Discount**
+    Create a static method that calculates final price after discount
 
 ---
 
