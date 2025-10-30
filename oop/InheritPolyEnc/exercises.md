@@ -98,3 +98,47 @@
 58. Combine inheritance and operator overloading: a `Polynomial` class that supports `+` between two polynomials.
 59. Demonstrate polymorphism by defining `make_sound()` in `Dog`, `Car`, and `Alarm`. Pass all to a single function that invokes it.
 60. Write a small “battle simulator”: classes `Soldier`, `Tank`, `Helicopter`, each with `attack()`. Loop over a list of mixed objects to call their respective attacks.
+
+### III. Encapsulation (30 Exercises)
+
+#### **Public and Protected Members**
+
+1. Create a class `Person` with public attributes `name` and `age`. Access and modify them directly.
+2. Create a class `Employee` with `_salary` (protected). Print it inside the class but not outside.
+3. Write a `Student` class with `_grades` as protected and create a method `display_grades()` to show them.
+4. Demonstrate that protected members can still be accessed externally but by convention shouldn’t be.
+5. Extend `Employee` → `Manager` and access `_salary` from the subclass to prove inheritance accessibility.
+6. Create a class `Account` with `_balance`. Add a method `deposit()` that modifies `_balance` safely.
+
+#### **Private Members and Name Mangling**
+
+7. Create a class `BankAccount` with `__balance` as private. Attempt to access it directly — observe error.
+8. Access the same `__balance` using name mangling (`_BankAccount__balance`).
+9. Write a `Locker` class with `__pin`. Add a method `open_locker(pin)` that checks the pin.
+10. Create a class `Car` with `__engine_number` and `__mileage`. Add a method to print both internally.
+11. Demonstrate that a private variable in base class cannot be accessed in subclass directly.
+12. Use name mangling to read a private variable from outside (educational purpose only).
+13. Create a private method `__calculate_interest()` inside `BankAccount` and call it from a public method.
+14. Verify private attributes do not appear in `dir(obj)` under their original names.
+15. Print `obj.__dict__` of an object with private attributes to inspect name-mangled versions.
+
+#### **Getter and Setter Methods**
+
+16. Create a `Temperature` class with private `_celsius` attribute. Add getter and setter methods manually.
+17. In setter, ensure temperature never drops below absolute zero (-273.15).
+18. Add a `get_fahrenheit()` method that converts Celsius to Fahrenheit.
+19. Create `Student` class with private `__marks`. Use getter to read and setter to validate (0–100).
+20. Implement a `set_password()` and `check_password()` pair with basic validation in a `UserAccount` class.
+21. Demonstrate the difference between direct attribute modification vs using a setter method.
+
+#### **Using `@property`**
+
+22. Recreate the `Temperature` class using `@property` for cleaner access.
+23. Implement `@temperature.setter` to perform validation on assignment.
+24. Add a `@temperature.deleter` that deletes the value and prints “Temperature deleted.”
+25. Create a `Rectangle` class with `@property` for `area`, automatically calculated from `width` and `height`.
+26. Create a `Circle` class with radius as a private attribute and expose `diameter` and `area` as computed properties.
+27. Create `BankAccount` with `@property balance`, which returns a rounded balance value.
+28. Add `@balance.setter` that prevents setting a negative balance.
+29. Add `@balance.deleter` to simulate closing an account and wiping balance.
+30. Implement a `Person` class with `@property fullname` combining first and last names, with custom setter and deleter.
