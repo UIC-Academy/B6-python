@@ -34,7 +34,7 @@ Tuzishimiz kerak bo'lgan konstruksiyalar:
     - Metodlari: deposit(amount: int), withdraw(amount: int), display_info(), record_transaction(type: str, amount: int)
 - `Transaction` classi.
     - Atributlari: id: uuid, type: str, sender_name: str, receiver_name: str, amount: int, status: str, datetime: datetime
-    - Metodlari: `__str__()
+    - Metodlari: `__str__()`
 
 
 Barcha accountlar `accounts` deb nomlangan listda saqlanadi. Bunda, list ichida `BankAccount` klassidan olingan “mahsulot”lar, yoxud obyektlar saqlanadi. Masalan:

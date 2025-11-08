@@ -1,0 +1,9 @@
+[project]
+name = "Python-module-Capstone-Project"
+version = "0.1.0"
+description = "This is the official project for the Python module at UIC Academy"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "ruff>=0.14.4",
+]
