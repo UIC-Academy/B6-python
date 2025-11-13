@@ -91,3 +91,26 @@ Chiqish.
 ---
 
 #### Version 2: Adding Persistent Storage (File and JSON)
+
+Oddiy list va dictionary bilan ishlaydigan holatga kelgach, endi ma'lumotlarni doimiy xotiraga saqlash masalasini ko'rishimiz kerak. Bunda biz JSON faylga saqlashimiz maqsadga muvofiqdir.
+
+- `data` nomli papka oching va unda `accounts.json` faylini yarating. 
+- dastur ishga tushganda mavjud akkauntlarni `accounts.json` faylidan o'qiydigan va agar fayl bo'sh bo'lsa bo'sh listligicha qoladigan logika yozing. Potensial errorlarni ham handle qiling.
+- Dastur yakunlanganda barcha akkauntlar `accounts.json` fayliga yozilsin.
+- `data` papkasi ichida `transactions.json` faylini yarating.
+- dastur ishga tushganda mavjud tranzaksiyalarni `transactions.json` faylidan o'qiydigan va agar fayl bo'sh bo'lsa bo'sh listligicha qoladigan logika yozing. Potensial errorlarni ham handle qiling.
+- dastur yakunlanganda barcha tranzaksiyalar `transactions.json` fayliga yozilsin.
+
+#### Version 3: Modularization and Extra Stuff
+
+3-bosqichda esa dasturni real hayotga yaqinroq bo'lishi uchun package-module ko'rinishiga olib kelamiz. Shuningdek Logging uchun middleware (decorator) yozamiz.
+
+- Dasturni modular ko'rinishga olib keling. Bunda:
+	- `main.py` faqatgina dasturni yurgizish uchun
+	- `bankacc/cli.py` - CLI qismi uchun
+	- `bankacc/bank_account.py` - Bank Account va unga bog'liq funksiyalar
+	- `bankacc/transaction.py` - Transaction va unga bog'liq funksiyalar
+	- `bankacc/utils.py` - Qo'shimcha utilita funksiyalar
+- Foydalanuvchi har bir operatsiyani amalga oshirganda uni terminalga log qilib yozuvchi `log_action()` nomli dekorator yozing. 
+- Akkaunt uchun register/login/logout xususiyatini qo'shing.
+- Admin akkaunt barcha akkaunt egalari ro'yxatini sortlab ko'ra olishini ta'minlang.

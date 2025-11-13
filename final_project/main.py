@@ -43,6 +43,46 @@ class BankAccount:
         self.created_at = created_at
         self.transactions: list[Transaction] = []
 
+    def deposit(self, amount: int):
+        transaction = Transaction(
+            uuid.uuid4,
+            "deposit",
+            "air",
+            self.name,
+            amount,
+            "pending",
+            datetime.now(timezone.utc),
+        )
+        if 0 < amount <= self.balance:
+            self.balance += amount
+            transaction.status = "success"
+        else:
+            transaction.status = "failed"
+        self.transactions.append(transaction)
+        return self.balance
+
+    def withdraw(self, amount: int):
+        transaction = Transaction(
+            uuid.uuid4,
+            "withdraw",
+            self.name,
+            "air",
+            amount,
+            "pending",
+            datetime.now(timezone.utc),
+        )
+        self.balance -= amount
+        if 0 < amount <= self.balance:
+            self.balance -= amount
+            transaction.status = "success"
+        else:
+            transaction.status = "failed"
+        self.transactions.append(transaction)
+        return self.balance
+
+    def view_transactions(self):
+        return self.transactions
+
     def __str__(self):
         return f"BankAccount<name={self.name}>"
 
@@ -64,85 +104,89 @@ current_account = None
 
 # =============== Core Logic
 
+
 def create_account() -> BankAccount:
     print("Siz yangi akkaunt ochmoqchisiz. Quyidagi ma'lumotlarni kiriting:")
-    
+
     name: str = input("F.I.Sh: ")
     account_number: str = input("Akkaunt raqamingiz: ")
     balance: int = int(input("Mavjud balansingiz: "))
-    
+
     id: uuid.UUID = uuid.uuid4()
     created_at: datetime = datetime.now(timezone.utc)
-    
+
     new_account: BankAccount = BankAccount(
         id=id,
         name=name,
         account_number=account_number,
         balance=balance,
-        created_at=created_at
+        created_at=created_at,
     )
-    
+
     global accounts
     accounts.append(new_account)
-    
+
     return new_account
+
 
 def view_all_accounts():
     print("Barcha akkauntlar ro'yxati:")
     for i, account in enumerate(accounts):
-        print(f"{i+1}. {account.name} - {account.balance}")
-    
+        print(f"{i + 1}. {account.name} - {account.balance}")
+
     is_end: str = input("Operatsiyani yakunlashni istaysizmi? ")
-    if is_end == '\n':
+    if is_end == "\n":
         return None
+
 
 def search_account():
     searched_name = input("Qidirilayotgan account egasini kiriting: ")
-    
+
     print("===== Natijalar =====")
     for i, account in enumerate(accounts):
         if searched_name.lower() in account.name.lower():
-            print(f"{i+1}. {str(account.id)} - {account.name} - {account.account_number}")
+            print(
+                f"{i + 1}. {str(account.id)} - {account.name} - {account.account_number}"
+            )
 
     is_end: str = input("Operatsiyani yakunlashni istaysizmi? ")
-    if is_end == '\n':
+    if is_end == "\n":
         return None
 
-def deposit():
-    pass
 
-def withdraw():
-    pass
-
-def view_transactions():
-    pass
-
-def delete_account():
-    pass
+def delete_account(card_number: str):
+    global accounts
+    for acc in accounts:
+        if acc.account_number == card_number:
+            accounts.remove(acc)
+            print("akkount uchirildi ")
+            return
+        print("akkount topilmadi ")
 
 
 # =============== Main Menu Loop
 
+
 def main_menu() -> None:
-    while True:        
+    while True:
         print(menu_text)
         choice: int = int(input("Enter your choice: "))
-        
+
         if choice == 1:
             global current_account
             current_account = create_account()
-            
+
             print("Akkaunt muvaffaqiyatli yaratildi.")
         elif choice == 2:
             view_all_accounts()
         elif choice == 3:
             search_account()
         elif choice == 4:
-            deposit()
+            current_account.deposit()
         elif choice == 5:
-            withdraw()
+            current_account.withdraw()
         elif choice == 6:
-            view_transactions()
+            current_account.view_transactions()
         elif choice == 7:
             delete_account()
         else:
