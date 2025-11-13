@@ -8,23 +8,31 @@ class Transaction:
     def __init__(
         self,
         id: uuid.UUID,
+        account_id: uuid.UUID,
         type: str,
-        sender_name: str,
-        receiver_name: str,
         amount: int,
         status: str,
         datetime: datetime,
     ) -> None:
         self.id = id
         self.type = type
-        self.sender_name = sender_name
-        self.receiver_name = receiver_name
+        self.account_id = account_id
         self.amount = amount
         self.status = status
         self.datetime = datetime
+        
+    def to_dict(self):
+        return {
+            "id": str(self.id),
+            "account_id": str(self.account_id),
+            "type": self.type,
+            "amount": self.amount,
+            "status": self.status,
+            "created_at": self.datetime
+        }
 
     def __str__(self) -> str:
-        return f"Transaction<id={str(self.id)}>"
+        return f"Transaction<sender={self.sender_name}, amount={self.amount}>"
 
 
 class BankAccount:
@@ -41,47 +49,68 @@ class BankAccount:
         self.account_number = account_number
         self.balance = balance
         self.created_at = created_at
-        self.transactions: list[Transaction] = []
 
     def deposit(self, amount: int):
+        global transactions
         transaction = Transaction(
-            uuid.uuid4,
-            "deposit",
-            "air",
-            self.name,
-            amount,
-            "pending",
-            datetime.now(timezone.utc),
+            id=uuid.uuid4(),
+            account_id=current_account.id,
+            type="deposit",
+            amount=amount,
+            status="success",
+            datetime=datetime.now(timezone.utc),
         )
-        if 0 < amount <= self.balance:
-            self.balance += amount
-            transaction.status = "success"
-        else:
-            transaction.status = "failed"
-        self.transactions.append(transaction)
+        
+        transactions["records"].append(transaction.to_dict())
+        transactions["count"] += 1
+        self.balance += amount
+        
+        print(f"Pul muvaffaqiyatli yechildi! Hozir hisobingizda {self.balance} summa bor.")
+        
+        is_end: str = input("Operatsiyani yakunlashni istaysizmi? ")
+        if is_end == "\n":
+            return None
         return self.balance
 
     def withdraw(self, amount: int):
+        global transactions
         transaction = Transaction(
-            uuid.uuid4,
-            "withdraw",
-            self.name,
-            "air",
-            amount,
-            "pending",
-            datetime.now(timezone.utc),
+            id=uuid.uuid4(),
+            account_id=current_account.id,
+            type="withdraw",
+            amount=amount,
+            status="pending",
+            datetime=datetime.now(timezone.utc),
         )
-        self.balance -= amount
-        if 0 < amount <= self.balance:
-            self.balance -= amount
-            transaction.status = "success"
-        else:
+        if amount > self.balance:
             transaction.status = "failed"
-        self.transactions.append(transaction)
+            print("Balansingizda yetarli mablag' mavjud emas.")
+            return
+
+        self.balance -= amount
+        transaction.status = "success"
+        transactions["records"].append(transaction.to_dict())
+        transactions["count"] += 1
+        print("Pul muvaffaqiyatli yechildi!")
+        
+        is_end: str = input("Operatsiyani yakunlashni istaysizmi? ")
+        if is_end == "\n":
+            return None
         return self.balance
 
     def view_transactions(self):
-        return self.transactions
+        global transactions
+        for i, transaction in enumerate(transactions["records"]):
+            if str(current_account.id) == str(transaction.account_id):
+                print(f"{i+1}. {transaction}")
+            
+    def delete_account(self):
+        global current_account
+        current_account = None
+        
+        print("Akkauntingiz muvaffaqiyatli o'chirildi!")
+        
+        return True
 
     def __str__(self):
         return f"BankAccount<name={self.name}>"
@@ -90,6 +119,10 @@ class BankAccount:
 # =============== Globals
 
 accounts: list[BankAccount] = []
+transactions: dict = {
+    "count": 0,
+    "records": []
+}
 menu_text: str = """=== Bank System Menu ===
 1. Create New Account
 2. View All Accounts
@@ -154,16 +187,6 @@ def search_account():
         return None
 
 
-def delete_account(card_number: str):
-    global accounts
-    for acc in accounts:
-        if acc.account_number == card_number:
-            accounts.remove(acc)
-            print("akkount uchirildi ")
-            return
-        print("akkount topilmadi ")
-
-
 # =============== Main Menu Loop
 
 
@@ -182,13 +205,28 @@ def main_menu() -> None:
         elif choice == 3:
             search_account()
         elif choice == 4:
-            current_account.deposit()
+            while True:
+                amnt = int(input("Kiritmoqchi bo'lgan summangizni kiriting: "))
+                if amnt <= 0:
+                    print("Manfiy sonni kirita olmaysiz!")
+                    continue
+                break
+            current_account.deposit(amount=amnt)
         elif choice == 5:
-            current_account.withdraw()
+            while True:
+                amnt = int(input("Yechmoqchi bo'lgan summangizni kiriting: "))
+                if amnt <= 0:
+                    print("Manfiy sonni kirita olmaysiz!")
+                    continue
+                break
+            current_account.withdraw(amount=amnt)
         elif choice == 6:
             current_account.view_transactions()
         elif choice == 7:
-            delete_account()
+            is_confirmed = input("Rostdan akkauntingizni o'chirmoqchimisiz? (Ha (1)/Yoq (0)): ")
+            if is_confirmed != "1":
+                continue
+            current_account.delete_account()
         else:
             print("Exit")
             break
