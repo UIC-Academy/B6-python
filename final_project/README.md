@@ -101,7 +101,7 @@ Oddiy list va dictionary bilan ishlaydigan holatga kelgach, endi ma'lumotlarni d
 - dastur ishga tushganda mavjud tranzaksiyalarni `transactions.json` faylidan o'qiydigan va agar fayl bo'sh bo'lsa bo'sh listligicha qoladigan logika yozing. Potensial errorlarni ham handle qiling.
 - dastur yakunlanganda barcha tranzaksiyalar `transactions.json` fayliga yozilsin.
 
-#### Version 3: Modularization and Extra Stuff
+#### Version 3: Authentication, Middleware and Modularization
 
 3-bosqichda esa dasturni real hayotga yaqinroq bo'lishi uchun package-module ko'rinishiga olib kelamiz. Shuningdek Logging uchun middleware (decorator) yozamiz.
 
@@ -113,4 +113,18 @@ Oddiy list va dictionary bilan ishlaydigan holatga kelgach, endi ma'lumotlarni d
 	- `bankacc/utils.py` - Qo'shimcha utilita funksiyalar
 - Foydalanuvchi har bir operatsiyani amalga oshirganda uni terminalga log qilib yozuvchi `log_action()` nomli dekorator yozing. 
 - Akkaunt uchun register/login/logout xususiyatini qo'shing.
-- Admin akkaunt barcha akkaunt egalari ro'yxatini sortlab ko'ra olishini ta'minlang.
+
+#### Version 4: Fix Auth Flow in Modular Structure, Give Admin Access
+
+3-versiyadan keyin bizda muammo paydo bo'ldi - endi bizda 1 ta katta package va 5-6 ta module bor. Bitta global `current_user` o'zgaruvchisi login qilgan mavjud userni ushlab tura olmay qoldi, sababi biz `accounts.py` faylida `login()` qilganimizda o'zgaruvchiga qiymat bersak-da bu qiymat faqat o'sha `accounts.py` moduli uchun o'zgaryapti, lekin `settings.py` (original lokatsiyasi) da haliyam None qolib ketmoqda.
+4-versiyada muammoga approachni o'zgartiramiz. 
+
+❗️ Ayni paytda `BankAccount` klassi ham ma'lumotni ham uning ustidagi amallar (`deposit`, e.g.) ni o'zida ushlab turibdi. Bu esa `current_account` da albatta Account objecti turishiga majburlaydi. Lekin bu o'z navbatida yuqoridagi namespace muammosiga olib keladi.
+✅ Shu sabab, barcha logika metodlarni mustaqil funksiyalarga olib o'tamiz va `BankAccount` klassi faqatgina ma'lumot ushlovchi **data model** sifatida qoldiramiz (aslida ham backendda shunday bo'ladi).
+
+❗️❗️ Ayni paytda bizda global `accounts` va `transactions` o'zgaruvchilari mavjud va ular live obyektlarni ushlab turibdi. Har dastur o'chganida ularni qayta JSON faylga yozyapmiz, lekin bu yaxshi fikr emas. Sababi bizda endi 2 ta ma'lumot manbayi bor - JSON va global live objectlar. Qaysi biri haqiqat? Muammo. Dastur exitni bosib emas Ctrl+C bilan yakunlansachi?
+✅ Har operatsiyada biz JSON faylga to'g'ridan-to'g'ri yozishimiz kerak. Ya'ni, deposit bo'ldimi, birdan yangi tranzaksiya aynan JSON faylga qo'shilishi talab etiladi.
+
+Qo'shimcha funksionalliklar:
+- Maxsus admin akkaunt qo'shing va Admin akkaunt barcha akkaunt egalari ro'yxatini hamda barcha tranzaksiyalar ro'yxatini ko'ra olishini ta'minlang.
+- Main Menu tugmalarini user login qilgan qilmagani va admin yoki admin emasligiga qarab ko'rinadigan qiling.
