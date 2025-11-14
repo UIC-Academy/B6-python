@@ -1,80 +1,91 @@
-import time
+from mybank.session import load_session, check_session_is_valid
+from mybank.auth import login, register_account, get_account_profile, logout, delete_account
+from mybank.utils import do_you_want_continue, print_commands
+from mybank.services import deposit, withdraw, view_transactions
 
-from mybank.lifespan import load_accounts, load_transactions, save_accounts, save_transactions
-from mybank.account import login, search_account, view_all_accounts
-from mybank import current_account
+
+login_command = [
+    "0. Log In",
+]
+
+register_command = [
+    "1. Register New Account",
+]
+
+protected_commands = [
+    "2. Get Profile",
+    "3. Deposit",
+    "4. Withdraw",
+    "5. My Transactions",
+    "6. Log Out",
+    "7. Delete Account",
+]
+
+admin_commands = [
+    "8. View All Accounts",
+    "9. Search Account",
+    "10. View All Transactions",
+]
+
+exit_command = ["-1. Exit"]
 
 
-menu_text: str = """=== Bank System Menu ===
-0. Log In
-1. Create New Account
-2. View All Accounts
-3. Search Account
-4. Deposit
-5. Withdraw
-6. View Transactions
-7. Log Out
-8. Delete Account
--1. Exit
-========================"""
+def print_menu(account_id: str, expires_at: str) -> None:
+    if not account_id:
+        print_commands(commands=login_command + register_command + exit_command)
+    elif (
+        account_id
+        and expires_at
+        and check_session_is_valid(account_id=account_id, session_expires_at=expires_at)
+    ):
+        print_commands(commands=protected_commands + exit_command)
+
 
 def main_menu() -> None:
-    load_accounts()
-    load_transactions()
     while True:
-        print(menu_text)
+        account_id, expires_at = load_session()
+        print_menu(account_id, expires_at)
+
         choice: int = int(input("Enter your choice: "))
 
         if choice == 0:
-            attempt_count = 0
-            is_logged_in = False
-            
-            while True:
-                is_logged_in = login()
-                if is_logged_in:
-                    break
-                attempt_count += 1
-                
-                if attempt_count > 2:
-                    break
-            
-            if not is_logged_in:
-                print("Too many attempts. Please try again.")
-                time.sleep(5)
-            
+            # LOGIN
+            login()
+            do_you_want_continue()
+            continue
         elif choice == 1:
-            print("Akkaunt muvaffaqiyatli yaratildi.")
+            # REGISTER
+            register_account()
+            do_you_want_continue()
         elif choice == 2:
-            view_all_accounts()
+            # PROFILE
+            get_account_profile(account_id=account_id)
+            do_you_want_continue()
         elif choice == 3:
-            search_account()
+            # DEPOSIT
+            deposit(account_id=account_id, amount=int(input("Enter amount: ")))
+            do_you_want_continue()
         elif choice == 4:
-            while True:
-                amnt = int(input("Kiritmoqchi bo'lgan summangizni kiriting: "))
-                if amnt <= 0:
-                    print("Manfiy sonni kirita olmaysiz!")
-                    continue
-                break
-            current_account.deposit(amount=amnt)
+            # WITHDRAW
+            withdraw(account_id=account_id, amount=int(input("Enter amount: ")))
+            do_you_want_continue()
         elif choice == 5:
-            while True:
-                amnt = int(input("Yechmoqchi bo'lgan summangizni kiriting: "))
-                if amnt <= 0:
-                    print("Manfiy sonni kirita olmaysiz!")
-                    continue
-                break
-            current_account.withdraw(amount=amnt)
+            # MY TRANSACTIONS
+            view_transactions(account_id=account_id)
+            do_you_want_continue()
         elif choice == 6:
-            current_account.view_transactions()
+            # LOGOUT
+            logout()
+            do_you_want_continue()
         elif choice == 7:
-            current_account.logout()
-        elif choice == 8:
-            is_confirmed = input("Rostdan akkauntingizni o'chirmoqchimisiz? (Ha (1)/Yoq (0)): ")
+            # DELETE ACCOUNT
+            is_confirmed = input(
+                "Rostdan akkauntingizni o'chirmoqchimisiz? (Ha (1)/Yoq (0)): "
+            )
             if is_confirmed != "1":
                 continue
-            current_account.delete_account()
+            delete_account(account_id=account_id)
+            pass
         else:
-            save_accounts()
-            save_transactions()
             print("Exit")
             break

@@ -7,7 +7,7 @@
             "password": "meneshmat01",
             "name": "Eshmat Toshmatov",
             "account_number": "1111 2222 3333 4444",
-            "balance": 0,
+            "balance": 3000,
             "is_active": true,
             "created_at": "2025-01-01 00:00:00"
         },
