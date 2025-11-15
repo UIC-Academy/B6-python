@@ -6,6 +6,7 @@ from mybank.settings import accounts, transactions
 from mybank.models import Transaction
 
 
+@log_action
 def deposit(account_id: str, amount: int):
     accounts["count"], accounts["records"] = load_accounts()
     transactions["count"], transactions["records"] = load_transactions()
@@ -32,6 +33,7 @@ def deposit(account_id: str, amount: int):
     return is_found
 
 
+@log_action
 def withdraw(account_id: str, amount: int):
     accounts["count"], accounts["records"] = load_accounts()
     is_found = False
@@ -57,6 +59,7 @@ def withdraw(account_id: str, amount: int):
     return is_found
 
 
+@log_action
 def view_transactions(account_id: str):
     transactions["count"], transactions["records"] = load_transactions()
 
