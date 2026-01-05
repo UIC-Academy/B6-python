@@ -1,6 +1,7 @@
 def moving_up():
     print("Moving up...")
-    
+
+
 def moving_down():
     print("Moving down...")
 

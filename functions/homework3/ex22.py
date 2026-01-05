@@ -4,9 +4,6 @@ users = [
     ("Gulchapchap", 19),
 ]
 
-sorted_users = sorted(
-    users,
-    key=lambda x: x[1]
-)
+sorted_users = sorted(users, key=lambda x: x[1])
 
 print(sorted_users)

@@ -1,4 +1,4 @@
-def f(x: int) -> None:   # x is a parameter
+def f(x: int) -> None:  # x is a parameter
     print(x)
     return None
 
@@ -14,5 +14,5 @@ Parameters and Arguments
 """
 
 
-def f() -> str:    
+def f() -> str:
     return "Hello World"

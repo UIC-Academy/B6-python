@@ -9,6 +9,7 @@ def increment():
     global count
     count += 1
 
+
 increment()
 increment()
 

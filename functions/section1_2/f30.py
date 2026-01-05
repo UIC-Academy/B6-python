@@ -9,9 +9,10 @@ def build_sentence(*words, sep=" "):
     # res = ""
     # for word in words:
     #     res += word + sep
-    
+
     # return res[:-1]
-    
+
+
 res = build_sentence("Hello", "Eshmat", "how", "are", "you", sep="-")
 
 print(res)

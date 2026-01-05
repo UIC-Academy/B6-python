@@ -4,7 +4,7 @@ products: dict = {
     "ananas": 100,
     "mandarin": 50,
     "nok": 30,
-    "malina": 150
+    "malina": 150,
 }
 
 # Teacher's solution (inefficient)

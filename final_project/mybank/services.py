@@ -1,7 +1,12 @@
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 
 from mybank.middlewares import log_action
-from mybank.lifespan import load_accounts, load_transactions, save_accounts, save_transactions
+from mybank.lifespan import (
+    load_accounts,
+    load_transactions,
+    save_accounts,
+    save_transactions,
+)
 from mybank.settings import accounts, transactions
 from mybank.models import Transaction
 
@@ -11,12 +16,12 @@ def deposit(account_id: str, amount: int):
     accounts["count"], accounts["records"] = load_accounts()
     transactions["count"], transactions["records"] = load_transactions()
     is_found = False
-    
+
     for account in accounts["records"]:
         if account["is_active"] and account["id"] == account_id:
             is_found = True
             account["balance"] += amount
-            
+
     new_transaction = Transaction(
         account_id=account_id,
         type="deposit",
@@ -26,7 +31,7 @@ def deposit(account_id: str, amount: int):
     )
     transactions["records"].append(new_transaction.to_dict())
     transactions["count"] += 1
-    
+
     save_accounts(accounts)
     save_transactions(transactions)
 
@@ -37,12 +42,12 @@ def deposit(account_id: str, amount: int):
 def withdraw(account_id: str, amount: int):
     accounts["count"], accounts["records"] = load_accounts()
     is_found = False
-    
+
     for account in accounts["records"]:
         if account["is_active"] and account["id"] == account_id:
             is_found = True
             account["balance"] -= amount
-    
+
     new_transaction = Transaction(
         account_id=account_id,
         type="deposit",
@@ -52,7 +57,7 @@ def withdraw(account_id: str, amount: int):
     )
     transactions["records"].append(new_transaction.to_dict())
     transactions["count"] += 1
-    
+
     save_accounts(accounts)
     save_transactions(transactions)
 

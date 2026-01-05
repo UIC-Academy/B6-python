@@ -1,7 +1,7 @@
 import utilities
 
 
-print(utilities.myadd(1,2))
+print(utilities.myadd(1, 2))
 
 print(dir(utilities))
 

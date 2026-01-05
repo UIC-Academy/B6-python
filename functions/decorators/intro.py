@@ -10,15 +10,17 @@ def logger(func):
         func()
         print("After function")
         # function completed at time.Now()
-    
+
     return wrapper
+
 
 @logger
 def f():
     print("Hello")
 
+
 f()
-    
+
 # resf = logger(f)
 # print(resf)
 # resf()

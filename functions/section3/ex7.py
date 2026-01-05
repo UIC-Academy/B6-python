@@ -2,7 +2,7 @@ def create_multiplier(n):
     def inner(x) -> int:
         # nonlocal n
         return x * n
-    
+
     return inner
 
 

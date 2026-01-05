@@ -5,11 +5,12 @@ class Vehicle:
 
 class Car(Vehicle):
     pass
-        
+
 
 class Train(Vehicle):
     def move(self):
         print("puuuv...")
+
 
 c = Car()
 t = Train()

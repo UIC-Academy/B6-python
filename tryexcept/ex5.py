@@ -7,4 +7,3 @@ while True:
     except ValueError:
         print("Iltimos son kiriting")
         continue
-    

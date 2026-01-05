@@ -1,5 +1,11 @@
 from mybank.session import load_session, check_session_is_valid
-from mybank.auth import login, register_account, get_account_profile, logout, delete_account
+from mybank.auth import (
+    login,
+    register_account,
+    get_account_profile,
+    logout,
+    delete_account,
+)
 from mybank.utils import do_you_want_continue, print_commands
 from mybank.services import deposit, withdraw, view_transactions
 

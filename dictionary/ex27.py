@@ -14,6 +14,4 @@ for word in s.split():
 print(freq)
 
 
-dc = {
-    (1, frozenset({11,2,3}), 3): "list"
-}
+dc = {(1, frozenset({11, 2, 3}), 3): "list"}

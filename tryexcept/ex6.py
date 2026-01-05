@@ -1,8 +1,4 @@
-dc = {
-    "name": "Eshmat",
-    "age": 19,
-    "city": "Tashkent"
-}
+dc = {"name": "Eshmat", "age": 19, "city": "Tashkent"}
 
 
 try:

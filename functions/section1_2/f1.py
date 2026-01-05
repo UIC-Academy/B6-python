@@ -12,5 +12,5 @@ def max_of_three(a: int, b: int, c: int) -> int:
         return c
 
 
-res = max_of_three(1,2,3)
-print(res*100)
+res = max_of_three(1, 2, 3)
+print(res * 100)

@@ -1,7 +1,9 @@
 import time
 
+
 def our_cache(func):
     last_calls = dict()
+
     def wrapper(*args, **kwargs):
         nonlocal last_calls
         print(last_calls)
@@ -14,7 +16,7 @@ def our_cache(func):
             if len(last_calls) > 2:
                 last_calls.pop(list(last_calls.keys())[0])
             last_calls[s] = res
-        
+
     return wrapper
 
 

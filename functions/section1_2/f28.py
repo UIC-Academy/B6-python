@@ -1,5 +1,3 @@
-
-
 def calculate(*args, operation="sum"):
     if operation == "sum":
         return sum(args)
@@ -8,5 +6,6 @@ def calculate(*args, operation="sum"):
         for i in args:
             m *= i
         return m
-    
-print(calculate(1, 2, 3 ,4, 5, operation="multiply"))
+
+
+print(calculate(1, 2, 3, 4, 5, operation="multiply"))

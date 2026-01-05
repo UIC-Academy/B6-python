@@ -1,8 +1,7 @@
 from typing import Callable
 
-def decorator(
-    func: Callable
-):
+
+def decorator(func: Callable):
     def wrapper(*args, **kwargs):
         try:
             print("Function is being called...")
@@ -16,6 +15,7 @@ def decorator(
 
 @decorator
 def f():
-    print(1/0)
-    
+    print(1 / 0)
+
+
 f()

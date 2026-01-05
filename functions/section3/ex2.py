@@ -1,4 +1,4 @@
 operations = [min, max, sum]
 
 
-print(operations[2]([2,3]))
+print(operations[2]([2, 3]))

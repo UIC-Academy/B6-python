@@ -4,8 +4,9 @@ def exception_log(func):
             func()
         except Exception as err:
             print(f"Error type: {type(err)}:", err)
-        
+
     return wrapper
+
 
 @exception_log
 def myfunc():
@@ -20,5 +21,6 @@ def myfunc():
         raise KeyError("This key is not yours")
     else:
         raise Exception("Any other error")
+
 
 myfunc()

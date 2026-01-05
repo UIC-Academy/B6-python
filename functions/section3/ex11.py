@@ -2,6 +2,7 @@
 Lambda function = anonymous (nameless) functions
 """
 
+
 def sqr(a):
     return a**2
 

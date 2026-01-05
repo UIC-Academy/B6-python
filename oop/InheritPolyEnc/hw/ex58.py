@@ -1,7 +1,7 @@
 class Polynomial:
     def __add__(self, other):
         raise NotImplementedError
-    
+
 
 class QuadraticPolynomial(Polynomial):
     def __init__(self, a, b, c):
@@ -9,18 +9,16 @@ class QuadraticPolynomial(Polynomial):
         self.b = b
         self.c = c
         super().__init__()
-    
+
     def __add__(self, other):
         new_polynomial = QuadraticPolynomial(
-            a=self.a+other.a,
-            b=self.b+other.b,
-            c=self.c+other.c
+            a=self.a + other.a, b=self.b + other.b, c=self.c + other.c
         )
         return new_polynomial
-        
+
     def __str__(self):
         return f"{self.a}x**2+{self.b}x+{self.c}"
-    
+
 
 class LinearPolynomial(Polynomial):
     pass

@@ -1,10 +1,6 @@
 words = ["eshmat", "gishmat", "gulchapchap", "somsabek", "hi", "vali"]
 
-sorted_words = sorted(
-    words, 
-    key=lambda w: len(w),
-    reverse=True
-)
+sorted_words = sorted(words, key=lambda w: len(w), reverse=True)
 
 print(sorted_words)
 

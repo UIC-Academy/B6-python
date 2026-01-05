@@ -1,39 +1,36 @@
 class BankAccount:
     called_count = 0
     total_money = 0
-    
+
     def __init__(self, name, card_number, balance):
         self.name = name
         self.card_number = card_number
         self.balance = balance
-        
+
         BankAccount.total_money += self.balance
-    
+
     def deposit(self, amount: int):
         self.balance = self.balance + amount
         BankAccount.total_money += amount
-        
+
     def withdraw(self, amount: int):
         if amount > self.balance:
             raise ValueError("You don't have enough money!")
 
         self.balance = self.balance - amount
         BankAccount.total_money -= amount
-        
+
     def delete_account(self):
         print("Balance is chopped")
         del self.balance
 
+
 zafarbeks_card = BankAccount(
-    name="Zafarbek",
-    card_number="5614 3467 2134 8765",
-    balance=10000000
+    name="Zafarbek", card_number="5614 3467 2134 8765", balance=10000000
 )
 
 javohirs_card = BankAccount(
-    name="Javohir",
-    card_number="4916 1231 3456 7711",
-    balance=70000000
+    name="Javohir", card_number="4916 1231 3456 7711", balance=70000000
 )
 
 print("Bank balansi:", BankAccount.total_money)

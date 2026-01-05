@@ -1,10 +1,10 @@
 def student_info(name, age, **details):
     info = f"Name: {name}, Age: {age}"
-    
+
     if details:
         for key, value in details.items():
             info += f", {key}: {value}"
-    
+
     return info
 
 
